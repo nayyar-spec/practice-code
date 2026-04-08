@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Conditional Coloring in Datatable" icon-name="standard:palette">
+        <div class="slds-p-around_medium">
+            <template if:true={accountData}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={accountData}
+                    columns={columns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (Working & Logic)
+cellAttributes:
+
+Requirement: Ye ek special object hai columns array ke andar. Iska kaam cell ki "internal properties" (jaise class, alignment, icon) ko control karna hai.
+
+Dynamic Class Binding:
+
+Logic: class: { fieldName: 'industryClass' }. Yahan humne class ka naam hardcode nahi kiya. LWC har row ke liye industryClass column check karega aur wahi CSS class apply kar dega.
+
+Data Mapping:
+
+Working: data.map() ka use karke humne original data ko modify kiya. Salesforce se aaye hue data mein industryClass field nahi hoti, humne use JS mein "On-the-fly" banaya hai.
+
+Icons Integration:
+
+Note: Aap sirf color hi nahi, balki cell ke andar icons bhi conditionally dikha sakte hain (jaise utility:check for success). -->

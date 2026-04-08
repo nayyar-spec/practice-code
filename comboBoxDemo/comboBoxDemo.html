@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Combo Box (Topic #13)" icon-name="standard:choice">
+        
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+                name="status"
+                label="Status Select Karein"
+                value={selectedValue}
+                placeholder="Choose Status"
+                options={options}
+                onchange={handleChange} >
+            </lightning-combobox>
+
+            <p class="slds-m-top_medium">
+                Aapne chuna hai: <strong>{selectedValue}</strong>
+            </p>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (Working & Requirement)
+options Getter: Requirement ye hai ki options hamesha ek Array of Objects hone chahiye jisme label aur value keys honi hi chahiye. Agar aap name ya text likhoge toh dropdown kaam nahi karega.
+
+placeholder: Jab tak user ne kuch select nahi kiya, tab tak dabba khali na dikhe, isliye placeholder "Choose Status" likha jata hai.
+
+Dynamic Data: Abhi humne options "Hardcode" (fix) kiye hain, lekin aage jaakar hum in options ko Apex se ya Wire Service (Picklist Values) se mangwana seekhenge. -->

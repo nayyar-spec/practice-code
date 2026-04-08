@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title="Naya Account Banayein (Create Record LDS)" icon-name="standard:account">
+        
+        <div class="slds-p-around_medium">
+            <lightning-record-form
+                object-api-name={objectApiName}
+                fields={fields}
+                onsuccess={handleSuccess}
+                columns="2">
+            </lightning-record-form>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- Detailed Explanation (Beginner Friendly)
+A. lightning-record-form kyu use karein?
+Standard HTML mein aapko <input> banana padta, fir use JS se connect karna padta, fir Apex likhni padti. LDS (Lightning Data Service) mein ye component:
+
+Fields khud banata hai: Aapko CSS ki zaroorat nahi padti.
+
+Save Button khud deta hai: Aapko "Submit" button alag se nahi lagana padta.
+
+Validation khud karta hai: Agar 'Name' field required hai, toh ye bina naam bhare save nahi karne dega.
+
+B. HTML Attributes ka matlab:
+object-api-name: Ye sabse zaruri "Instruction" hai. Iske bina Salesforce ko pata hi nahi chalega ki data kahan save karna hai (Account mein ya Contact mein).
+
+fields: Hum JS mein ek array (list) bhejte hain. Salesforce unhe line-by-line form par saja deta hai.
+
+onsuccess: Ye ek "Listener" hai. Ye tab tak soya rehta hai jab tak user "Save" nahi dabata aur server se "OK" ka signal nahi aata.
+
+C. import statements kyu?
+Hum @salesforce/schema/Account.Name isliye likhte hain taaki agar kal ko koi admin Salesforce mein 'Name' field ka naam badal de, toh hamara code error na de (इसे Static Resource Reference kehte hain). -->

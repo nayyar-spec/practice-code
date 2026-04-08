@@ -1,0 +1,37 @@
+<!-- 
+ LWC DataTable mein kisi record ka naam dikhana aasaan hai, par use ek "Clickable Link" banana taaki wo asli Salesforce record par le jaye, iske liye humein type: 'url' aur typeAttributes ka sahi istemal karna padta hai. -->
+
+<template>
+    <lightning-card title="Clickable Related Records" icon-name="standard:contact">
+        <div class="slds-p-around_medium">
+            <template if:true={contactData}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={contactData}
+                    columns={columns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (The Magic behind Links):
+type: 'url':
+
+Logic: Ye DataTable ko batata hai ki is column mein blue color ka clickable text dikhana hai.
+
+typeAttributes:
+
+label: Ye sabse important hai. Agar aap label nahi denge, toh link mein /003XXXXXXXXXXXX (Record ID) dikhega. label: { fieldName: 'fullName' } bolne se ID ke piche asli naam chhup jata hai.
+
+target: _blank se naya tab khulta hai, _self se usi tab mein record khul jata hai.
+
+Data Flattening:
+
+Requirement: DataTable fieldName: 'Account.Name' ko support nahi karta. Isliye humne map function se use accountName naam ke naye variable mein daal diya.
+
+URL Format:
+
+Working: Salesforce mein /RECORD_ID likhne se browser apne aap use current domain ke record page par redirect kar deta hai. -->

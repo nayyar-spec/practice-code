@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Contact List" icon-name="standard:contact">
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={conList}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+
+        <template if:true={isEditModalOpen}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium">Edit the Record</h2>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-record-edit-form 
+                            class="slds-grid slds-wrap"
+                            record-id={currentRecordId} 
+                            object-api-name="Contact"
+                            onsuccess={handleEditSuccess}>
+                            <div class="slds-grid slds-wrap">
+                                <lightning-input-field class="slds-col slds-size_6-of-12" field-name="FirstName"></lightning-input-field>
+                                <lightning-input-field class="slds-col slds-size_6-of-12" field-name="Email"></lightning-input-field>
+                                <lightning-input-field class="slds-col slds-size_6-of-12" field-name="LeadSource"></lightning-input-field>
+                            </div>
+                            
+                            
+                            <div class="slds-m-top_medium">
+                                <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                                <lightning-button type="submit" label="Save" variant="brand" class="slds-m-left_x-small"></lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
+                    </div>
+
+
+                </div>
+            </section>
+        </template>
+
+        <template if:true={isDeleting}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">Are You Sure you want to delete the record ?</header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-button label="Cancel" variant="neutral" onclick={closeDeletingModal}></lightning-button>
+                        <lightning-button label="Yes" variant="Destructive" onclick={deleteContact}></lightning-button>
+                    </div>
+                </div>
+                
+            </section>
+        </template>
+    </lightning-card>
+</template>

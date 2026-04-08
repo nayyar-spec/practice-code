@@ -1,0 +1,14 @@
+/* Requirement: CSS classes jo cell ke text color ko badlengi */
+.green-text {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+.red-text {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.blue-text {
+    color: #1565c0;
+}

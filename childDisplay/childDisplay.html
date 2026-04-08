@@ -1,0 +1,29 @@
+<template>
+    <div class="slds-box slds-theme_success">
+        <p>Main Child Hoon. Mujhe ye order mila:</p>
+        <h1 class="slds-text-heading_medium">{messageFromParent}</h1>
+    </div>
+</template>
+
+<!-- Detailed Explanation (Concept samjhne ke liye)
+@api (The Public Key):
+
+Socho Child ek ghar hai. @api us ghar ki ek khidki hai. Parent us khidki se bahar se hi saman (data) andar phenk sakta hai. Agar @api nahi lagaya, toh Child ka variable "Private" rahega aur Parent use badal nahi payega.
+
+Naming Convention (The Dash Rule):
+
+JavaScript bahut nakhre wala hai, wo messageFromParent (Camel Case) pasand karta hai.
+
+HTML simple hai, wo capital letters nahi samajhta, isliye wo har capital letter ke aage dash laga deta hai: message-from-parent.
+
+Calling Child Functions:
+
+Parent sirf data hi nahi bhej sakta, balki Child ke andar ke kisi kaam (method) ko trigger bhi kar sakta hai. Iske liye hum this.template.querySelector use karke Child ko "Awaz lagate hain". -->
+
+
+
+
+<!-- 
+Direction,          Tool Used,        Method
+Child to Parent,    CustomEvent,      "Child chilla kar (Fire) bolta hai, Parent sunta (Listen) hai."
+Parent to Child,    @api,             Parent seedha Child ke variable mein value daal (Assign) deta hai. -->
