@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="LWC Accordion Demo (Topic #4)" icon-name="standard:drafts">
+        
+        <div class="slds-p-around_medium">
+            <lightning-accordion 
+                allow-multiple-sections-open
+                onsectiontoggle={handleSectionToggle}
+                active-section-name={activeSectionName}>
+
+                <lightning-accordion-section name="A" label="Section A: Personal Info">
+                    <p>Yahan user ki personal details aayengi.</p>
+                    <lightning-input label="Name" value="John Doe"></lightning-input>
+                </lightning-accordion-section>
+
+                <lightning-accordion-section name="B" label="Section B: Company Info">
+                    <p>Yahan company ki details dikhayi jayengi.</p>
+                    <p>Active Section Name 'B' rakha tha, isliye ye pehle se khula milega.</p>
+                </lightning-accordion-section>
+
+                <lightning-accordion-section name="C" label="Section C: Contact Details">
+                    <p>Phone: 999-888-7777</p>
+                    <p>Email: test@example.com</p>
+                </lightning-accordion-section>
+
+            </lightning-accordion>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 3. Smart Working Explanation (Comments for Beginners)
+active-section-name: Agar aap chahte ho ki shuru mein saare sections band rahein, toh is attribute ko khali chhod do.
+
+allow-multiple-sections-open: By default, Accordion ek baar mein sirf ek hi section kholta hai (ek kholne par doosra band ho jata hai). Lekin agar aapko multiple sections khule rakhne hain, toh ye attribute likhna zaroori hai.
+
+Custom Content: Accordion Section ke andar aap sirf text hi nahi, balki poori Data Table ya koi Form bhi daal sakte ho. Ye page ki lambai (vertical space) bachane ke liye sabse best tool hai. -->

@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Case Description List" icon-name="standard:caseDescription">
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={selectedCase}
+                columns={columns}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

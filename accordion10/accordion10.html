@@ -1,0 +1,27 @@
+<template>
+    <p> HI </p>
+    <lightning-accordion
+    allow-multiple-sections-open>
+        <template for:each={fresher} for:item="college">
+            <lightning-accordion-section key={college} label={college.col}>
+                <template for:each={college.year} for:item="year">
+                    <lightning-accordion-section key={year} label={year.yr}>
+                        <template for:each={year.profile} for:item="profile">
+                            <lightning-accordion-section key={profile} label={profile.prof}>
+                                <template for:each={profile.fresherList} for:item="fresher">
+                                    <div key={fresher.Id} class="slds-p-around_medium">
+                                        <p>{fresher.Student_Name__c}</p>
+                                        <p>{fresher.Student_Email__c}</p>
+                                        <p>{fresher.Student_Phone_Number__c}</p>
+                                        <p>{fresher.Status__c}</p>
+                                    </div>
+                                </template>
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion-section>
+        </template>
+    </lightning-accordion>
+
+</template>

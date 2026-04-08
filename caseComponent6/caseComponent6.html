@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Cases List" icon-name="standard:case">
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={cases}
+                columns={columns}
+                onrowselection={handleRowSelection}
+                max-row-selection="1">
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+    <div class="slds-p-around_medium">
+        <p>Cases with Status New => {newStatus}</p>
+        <p>Cases with Status Working => {workingStatus}</p>
+        <p>Cases with Status Escalated => {escalatedStatus}</p>
+        <p>Cases with Status Closed => {closedStatus}</p>
+    </div>
+</template>

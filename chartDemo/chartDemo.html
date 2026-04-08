@@ -1,0 +1,32 @@
+<!-- 
+ Salesforce LWC mein hum third-party libraries (jaise Chart.js) ka use karke data ko visual format (Bar, Pie, Line) mein dikha sakte hain. Iske liye humein Static Resource ka use karna padta hai.
+
+1. Setup (Preparation)
+Sabse pehle aapko Chart.js ki library download karke Salesforce ke Static Resource mein upload karni hogi (Naam rakhein: chartjs).
+
+2. JavaScript Logic (chartDemo.js)
+LWC mein external library use karne ke liye loadScript ka use hota hai. -->
+
+<template>
+    <lightning-card title="Account Industry Dashboard" icon-name="standard:dashboard">
+        <div class="slds-p-around_medium">
+            <div class="chart-container" lwc:dom="manual" style="height:300px;">
+                </div>
+        </div>
+    </lightning-card>
+</template>
+
+
+<!-- 
+Detailed Explanation (Code Breakdown)
+lwc:dom="manual":
+
+Logic: LWC apne DOM ko security ke liye "Lock" karke rakhta hai. Lekin Chart.js jaise libraries ko khuda canvas element chahiye hota hai. manual bolne se LWC kehta hai, "Theek hai, is div ke andar tum jo karna hai karo, main interfere nahi karunga."
+
+renderedCallback:
+
+Working: Humne loadScript yahan isliye likha kyunki humein guarantee chahiye ki pehle HTML load ho jaye, tabhi hum usme chart daal payenge.
+
+Static Resource:
+
+Requirement: Salesforce security (CSP) third-party websites se seedha code nahi lene deti. Isliye hum library download karke Salesforce ke andar hi save karte hain. -->
