@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="DataTable Sorting Demo" icon-name="standard:sort">
+        
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                sorted-by={sortedBy}
+                sorted-direction={sortedDirection}
+                onsort={handleSort}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+</template>
+<!-- 
+Detailed Working Guide (Logic Break-down):
+sortable: true:
+
+Requirement: Agar aap columns array mein ye nahi likhenge, toh header par click karne wala cursor (pointer) hi nahi aayega.
+
+JSON.parse(JSON.stringify(data)):
+
+Logic: Salesforce se aaya hua data "Read-only" hota hai. Aap use seedha .sort() nahi kar sakte. Isliye hum data ka ek "Deep Clone" (bilkul nayi copy) banate hain jise hum modify kar sakein.
+
+The Sort Math (x > y) - (y > x):
+
+Working: * Agar x > y, toh result 1 - 0 = 1.
+
+Agar y > x, toh result 0 - 1 = -1.
+
+Is result ko isReverse (1 ya -1) se multiply karke hum Asc/Desc handle karte hain.
+
+sorted-by aur sorted-direction:
+
+Requirement: Ye attributes sirf design (Arrow icons) ke liye hain. Inhe update nahi karoge toh sorting toh ho jayegi par user ko pata nahi chalega ki kis column se sort hua hai. -->

@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Account & Contacts Tree Grid" icon-name="standard:hierarchy">
+        
+        <div class="slds-p-around_medium">
+            <template if:true={gridData}>
+                <lightning-tree-grid
+                    columns={columns}
+                    data={gridData}
+                    key-field="Id"
+                    hide-checkbox-column="true">
+                </lightning-tree-grid>
+            </template>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (Working & Logic)
+The _children Secret:
+
+Requirement: lightning-tree-grid sirf tabhi "Expand/Collapse" button dikhata hai jab use kisi record ke andar _children naam ki list milti hai. Apex se data Contacts naam se aata hai, isliye JS mein humne use badal kar _children kiya.
+
+Mapping Data:
+
+Logic: data.map() ka use karke humne naya object array banaya. Isme humne Account ke fields ke saath-saath Contact ke data ko bhi merge kiya taaki wo ek hi table structure mein fit ho sakein.
+
+Self-Object Tree (Advanced Concept):
+
+Agar aapko "Parent Account -> Child Account" (same object) dikhana ho, toh Apex mein ParentId field ka use karke recursive query chalani padti hai, lekin JS ka logic wahi _children wala hi rahega. -->

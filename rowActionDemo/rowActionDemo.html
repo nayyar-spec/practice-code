@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Data Table with Row Actions" icon-name="standard:record">
+        
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- Smart Working Explanation (Comments for Beginners)
+event.detail.row: Ye LWC ka magic hai. Aapko ye find nahi karna padta ki "kaunsi row click hui?". LWC event.detail.row ke andar us poori row ka object (Id, Name, etc.) aapko plate mein saja kar de deta hai.
+
+action.name: Dropdown mein label kuch bhi ho (jaise "Mita do"), lekin name hamesha technical hota hai (jaise "delete"). Hum coding mein hamesha name check karte hain.
+
+Type 'action': Standard columns mein hum type: 'text' ya type: 'phone' dete hain, lekin menu ke liye humein type: 'action' dena padta hai. Isse Salesforce samajh jata hai ki yahan ek "Down Arrow" button lagana hai. -->

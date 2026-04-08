@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Standard Data Table Demo" icon-name="standard:account">
+        
+        <div slot="actions">
+            <lightning-button label="Refresh Table" onclick={updateTable}></lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                hide-checkbox-column="false">
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- Smart Working Explanations (Comments for Beginners)
+fieldNames ka khel: COLUMNS mein jo fieldName: 'Name' likha hai, wo exact wahi hona chahiye jo Apex ki SOQL query mein hai (SELECT Name...). Agar spelling galat hui, toh table column khali dikhega.
+
+key-field="Id": HTML mein hum loop ke waqt key={acc.Id} likhte the. Data table mein hume sirf ek baar key-field="Id" likhna padta hai, ye parde ke peeche har row ko unique ID de deta hai.
+
+Reactivity: Jaise hi refreshApex chalta hai aur this.accounts badalta hai, LWC automatic table ko re-render (update) kar deta hai. Aapko table ko "refresh" karne ke liye koi extra code nahi likhna padta. -->

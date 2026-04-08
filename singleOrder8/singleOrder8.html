@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Order Status Download">
+        <div class="slds-p-around_medium">
+            <template if:true={record} >
+                <p>ORDER ID: {record.id}</p>
+                <p>CUSTOMER NAME: {record.name}</p>
+                <p>ITEM: {record.item}</p>
+                <p>QUANTITY: {record.quantity}</p>
+                <p>STATUS: {record.status}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
