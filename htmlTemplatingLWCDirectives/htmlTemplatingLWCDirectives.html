@@ -1,0 +1,67 @@
+<template>
+    Yooo
+    <lightning-card title="HTML Template Component" icon-name="custom:custom14">
+        <div class="slds-p-around_medium slds-grid">
+            <div class="slds-col slds-size_3-of-12">
+                <lightning-combobox
+                    label="Category"
+                    value={selectedCategory}
+                    placeholder="Select Category"
+                    options={categoriesOption}
+                    onchange={categoryChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_3-of-12">
+                <lightning-combobox
+                    label="Price"
+                    value={priceOrder}
+                    placeholder="All"
+                    options={orders}
+                    onchange={priceOrderChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_3-of-12">
+                <lightning-combobox
+                    label="Rating"
+                    value={ratingOrder}
+                    placeholder="All"
+                    options={orders}
+                    onchange={ratingOrderChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+                <lightning-button variant="brand" label="Apply Filter" onclick={sortAndFilterProducts}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+    <div class="slds-grid slds-wrap">
+        <template for:each={filteredProducts} for:item="product">
+            <div class="slds-col slds-size_1-of-3" key={product.id} style="padding: 15px;">
+                <div class="slds-card"
+                    data-id={product.id}
+                    onclick={showDetail}
+                    role="button"
+                    tabindex="0"
+                    style="padding: 5px; height: 400px; display: flex; flex-direction: column; cursor: pointer;">
+                    <img src={product.image} alt={product.name} style="padding: 5px; height: 210px; object-fit: cover; border-radius: 15px"/>
+                    <div class="slds-card__header" style="padding: 5px; border-radius: 0.5rem; background: grey;">
+                        <h3 class="slds-card__header-title">{product.name}</h3>
+                    </div>
+                    <div class="slds-card__body" style="flex: 1; background: white; padding: 5px; border-radius: 0.5rem;">
+                        <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {product.description}
+                        </p>
+                        <p>Price: ${product.price}</p>
+                        <p>Stock Status: ${product.stockStatus}</p>
+                        <p>Rating: ${product.rating}</p>
+                    </div>
+                </div>
+            </div>
+            
+        </template>
+    </div>
+    
+
+
+
+</template>

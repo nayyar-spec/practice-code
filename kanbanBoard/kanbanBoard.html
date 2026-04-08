@@ -1,0 +1,65 @@
+<!-- 
+ Kanban board banane ke liye humein HTML5 ki Drag and Drop API aur Salesforce ke backend (Apex) ka combination use karna hoga. Iska logic 3 steps mein divided hai:
+
+Drag Start: Jab user card uthata hai (ID save karna).
+
+Allow Drop: Column ko batana ki "Haan, tumhare upar card rakha ja sakta hai".
+
+Drop & Update: Jab card chhoda jaye, toh Apex call karke Opportunity ka Stage badal dena. -->
+
+<template>
+    <lightning-card title="Opportunity Kanban Board" icon-name="standard:kanban">
+        <div class="slds-grid slds-gutters slds-p-around_medium" style="overflow-x: auto;">
+            
+            <template for:each={stages} for:item="stage">
+                <div key={stage} 
+                     class="slds-col slds-size_1-of-4 drop-zone"
+                     ondragover={handleAllowDrop} 
+                     ondrop={handleDrop} 
+                     data-stage={stage}>
+                    
+                    <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-align_center slds-box slds-theme_shade">
+                        {stage}
+                    </h2>
+
+                    <template for:each={opportunities} for:item="opp">
+                        <template if:true={opp.isMatch}> </template>
+                        
+                        <div if:true={opp} key={opp.Id}>
+                            <!-- <template if:true={opp.StageName === stage}> -->
+                            <template lwc:if={isTargetStage}>
+                                <div class="slds-box slds-m-bottom_small slds-theme_default card" 
+                                     draggable="true" 
+                                     ondragstart={handleDragStart} 
+                                     data-id={opp.Id}>
+                                    
+                                    <p><b>{opp.Name}</b></p>
+                                    <p>Acc: {opp.Account.Name}</p>
+                                    <p class="slds-text-color_weak">Amt: ${opp.Amount}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (The Drag-Drop Logic)
+draggable="true":
+
+Requirement: HTML elements default mein drag nahi hote. Ye attribute lagana zaroori hai.
+
+data-transfer:
+
+Logic: Ye ek "invisible pocket" ki tarah hai. Jab aap card uthate ho (onDragStart), aap ID is pocket mein daal dete ho. Jab card drop karte ho, tab wahan se ID nikal lete ho.
+
+event.preventDefault():
+
+Working: Browser hamesha sochta hai ki drop karna ek error ya download hai. handleAllowDrop mein ise rokna padta hai taaki card column ke andar "gir" sake.
+
+refreshApex:
+
+Requirement: Drop hone ke baad data badal gaya hai. refreshApex bina poora page reload kiye sirf Opportunities wala @wire dobara chalata hai, jisse card turant doosre column mein shift ho jata hai. -->

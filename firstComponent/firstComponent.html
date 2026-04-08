@@ -1,0 +1,22 @@
+<template>
+    <h1>Hello</h1>
+    <!-- Neutral variant (default) -->
+     <!-- {a} -->
+     <!-- {handle} -->
+    
+    <div class="slds-grid bodyColor">
+        <div class="slds-box">
+            <div class="slds-col"></div>
+            <lightning-input type="text" class="firstName" label="Enter First Name"></lightning-input>
+            <lightning-input type="text" class="lastName" label="Enter Last Name"></lightning-input>
+            <lightning-button label="Neutral" title="Non-primary action" onclick={handle} class="slds-m-left_x-small"></lightning-button>
+
+            <c-second-component-child></c-second-component-child>
+            <!-- The full Name => {fullName} -->
+        </div>
+    </div>
+
+    
+    
+    <!-- above as I have write a function onclick to run the function handle written in js file -->
+</template>

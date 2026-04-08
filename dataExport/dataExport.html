@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Export Data to CSV" icon-name="standard:file">
+        
+        <div slot="actions">
+            <lightning-button 
+                label="Download as CSV" 
+                icon-name="utility:download" 
+                variant="brand"
+                onclick={downloadCSV}>
+            </lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+</template>
+
+
+<!-- Detailed Explanation (Working & Logic)
+CSV Structure:
+
+Logic: CSV file ek plain text file hoti hai jahan har column comma (,) se aur har row nayi line (\n) se alag hoti hai. Humne forEach loop chalakar wahi format string mein banaya hai.
+
+Blob Object:
+
+Requirement: Browser text string ko file ki tarah nahi samajhta. Blob us text ko "File Data" mein badal deta hai taaki browser use download kar sake.
+
+The "Hidden Link" Trick:
+
+Working: Hum parde ke peeche ek <a> tag banate hain, usme file ka URL dalte hain, aur JS se use "Click" karwa dete hain. User ko lagta hai button se download hua, par asli kaam wo hidden link karta hai.
+
+Handling Special Characters:
+
+Note: Agar kisi Account Name mein khud comma (,) ho (e.g., "Edge, Inc."), toh CSV format kharab ho sakta hai. Real project mein hum values ko double quotes " mein wrap karte hain: "${acc.Name}". -->

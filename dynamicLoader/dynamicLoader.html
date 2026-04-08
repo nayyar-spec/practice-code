@@ -1,0 +1,44 @@
+<!-- 
+ 
+Kanban: Ye ek Visual Layout hai jahan cards ko ek column se doosre column mein drag-and-drop kiya jata hai (Jaise Trello).
+
+Dynamic Components: Iska matlab hai ki LWC mein ek hi jagah par condition ke hisaab se poora component hi badal dena (Runtime par decide karna ki kaunsa component dikhana hai).
+
+Chalo, hum Dynamic Component Switching seekhte hain jo Salesforce ka ek advance feature hai.
+
+1. Dynamic Component Kya Hai? (lwc:is)
+Pehle humein if:true use karna padta tha, lekin ab Salesforce ne lwc:is directive diya hai. Isse hum runtime par component ka naam variable mein pass kar sakte hain.
+
+Zaroori Rule: Is feature ko use karne ke liye aapko js-meta.xml mein Capabilities add karni padti hai.-->
+
+
+<template>
+    <lightning-card title="Dynamic Component Switcher" icon-name="standard:multi_picklist">
+        
+        <div class="slds-p-around_medium slds-text-align_center">
+            <lightning-button-group>
+                <lightning-button label="Show Table" onclick={showTable}></lightning-button>
+                <lightning-button label="Show Form" onclick={showForm}></lightning-button>
+            </lightning-button-group>
+        </div>
+
+        <hr/>
+
+        <div class="slds-p-around_medium">
+            <lwc:component lwc:is={componentConstructor}></lwc:component>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Working Guide (Concepts):
+Memory Management: Jab aap lwc:is se component badalte hain, toh purana component DOM se poori tarah destroy ho jata hai aur naya "fresh" load hota hai.
+
+Passing Properties: Agar aapko dynamic component ko data bhejna hai, toh aap normal property use kar sakte hain: <lwc:component lwc:is={comp} some-prop={value}></lwc:component>. Lekin yaad rahe, wo property dono components (Form aur Table) mein @api honi chahiye.
+
+Why use this over if:true?
+
+if:true mein saare components parde ke peeche load hote hain, jo page ko slow karte hain.
+
+lwc:is sirf wahi component load karta hai jiski zaroorat hai. -->

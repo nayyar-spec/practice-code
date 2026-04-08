@@ -1,0 +1,77 @@
+<template>
+    <lightning-card>
+        <div class="slds-row">
+            <template for:each={tabs} for:item="tab">
+                <lightning-button key={tab.value}
+                    variant="neutral"
+                    label={tab.label}
+                    value={tab.value}
+                    type="button"
+                    onclick={handleClick}
+                    class="">
+                </lightning-button>
+            </template>
+        </div>
+        <lightning-accordion>
+            <template for:each={mapOpp} for:item="bond">
+                <lightning-accordion-section key={bond.key} label={bond.key}>
+                    <table class="slds-table slds-table_bordered">
+                        <thead>
+                            <tr class="">
+                                <!-- <th scope="col"><div title="Name"><a >{pn.Name}</a></div></th> -->
+                                <th scope="col"><div title="Name">Name</div></th>
+                                <th scope="col"><div title="Amount">Amount</div></th>
+                                <th scope="col"><div title="Email">Email</div></th>
+                                <th scope="col"><div title="Action">Action</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={bond.item} for:item="opp">
+                                <tr key={opp.Id} class="row-hover">
+                                    <!-- <td>
+                                        <div>
+                                            <a href="/{opp.Id}" target="_blank">{opp.Name}</a>
+                                        </div>
+                                    </td> -->
+                                    <td><a href="javascript:void(0)" onclick={navigateToOpp} data-id={opp.Id}>{opp.Name}</a></td>
+                                    <td><div>{opp.Amount}</div></td>
+                                    <td><div>{opp.Email__c}</div></td>
+                                    <td>
+                                        <div class="actions-container">
+                                            <lightning-button-icon icon-name="utility:edit" onclick={openModal} 
+                                            data-id={opp.Id} data-name={opp.Name} data-amount={opp.Amount} data-email={opp.Email__c} title="Edit"></lightning-button-icon>
+                                            <lightning-button-icon icon-name="utility:delete" onclick={handleDeleteAction} data-id={opp.Id} title="Delete"></lightning-button-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+        <template lwc:if={isModalOpen} >
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open ">
+                <div class="slds-model__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            X
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium">Edit Opportunity</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-input label="Name" value={openedRecord.name} class="input-name"></lightning-input>
+                        <lightning-input label="Amount" value={openedRecord.amount} class="input-amount"></lightning-input>
+                        <lightning-input label="Email" value={openedRecord.email} class="input-email"></lightning-input>
+                    </div>
+
+                    <footer class="slds-modal__footer">
+                        <lightning-button class="slds-col slds-size_1-of-2" variant="neutral" onclick={closeModal} label="Cancel"></lightning-button>
+                        <lightning-button class="slds-col slds-size_1-of-2 edit-save" variant="brand" onclick={handleEdit2Action} label="Save"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </template>
+    </lightning-card>
+</template>

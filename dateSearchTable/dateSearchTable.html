@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Advanced Date Search" icon-name="standard:filter">
+        
+        <div class="slds-p-around_medium">
+            
+            <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input 
+                        type="search" 
+                        name="searchKey" 
+                        label="Account Name" 
+                        onchange={handleInput}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input 
+                        type="date" 
+                        name="startDate" 
+                        label="From (Created Date)" 
+                        onchange={handleInput}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input 
+                        type="date" 
+                        name="endDate" 
+                        label="To (Created Date)" 
+                        onchange={handleInput}>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <template if:true={accounts.data}>
+                <div style="height: 300px;">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={accounts.data}
+                        columns={columns}
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <template if:false={accounts.data}>
+                <p class="slds-text-align_center">Koi records nahi mile...</p>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

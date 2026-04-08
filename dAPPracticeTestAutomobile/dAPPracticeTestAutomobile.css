@@ -1,0 +1,18 @@
+lightning-button.green-color {
+    /* background: green; */
+    --slds-c-button-neutral-color-background: #3d750f;
+    --sds-c-button-neutral-color: #3d750f;
+}
+
+.actions-container {
+    display: none;
+}
+
+
+.row-hover:hover .actions-container {
+    display: block;
+}
+
+.edit-save:hover {
+    background: green;
+}

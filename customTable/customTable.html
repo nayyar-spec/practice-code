@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Custom HTML Data Table" icon-name="standard:customers">
+        
+        <div class="slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"><div class="slds-truncate" title="Name">Account Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Action">Custom Action</div></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <template for:each={accounts} for:item="acc">
+                        <tr key={acc.Id} class="slds-hint-parent">
+                            
+                            <td><div class="slds-truncate">{acc.Name}</div></td>
+                            
+                            <td><div class="slds-truncate">{acc.Phone}</div></td>
+                            
+                            <td>
+                                <button 
+                                    class="slds-button slds-button_neutral" 
+                                    onclick={handleRowClick} 
+                                    data-id={acc.Id}>
+                                    View Details
+                                </button>
+                            </td>
+
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+
+            <template if:true={error}>
+                <p class="slds-text-color_error">Data load karne mein problem aayi hai.</p>
+            </template>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 3. Smart Working Explanation (Parde ke peeche ki baatein)
+data-id={acc.Id}: HTML tags mein hum apni marzi ke attributes de sakte hain (data-*). Jab hum button click karte hain, toh JS mein event.target.dataset.id likhkar hum us specific row ki ID nikal lete hain.
+
+Flexibility: Custom table ka asli maza tab hai jab aapko cell ke andar Colors dene ho ya Icons lagane ho. Standard table mein aapko complex "Custom Types" banane padte hain, lekin yahan sirf ek <div> ya <span> lagakar color change ho jata hai.
+
+SLDS Classes: Maine slds-table_striped class use ki hai, isse table ki alternate rows (ek chhod kar ek) grey color ki ho jati hain, jisse data padhna aasan ho jata hai. -->

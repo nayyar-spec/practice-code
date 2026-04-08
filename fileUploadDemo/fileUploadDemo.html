@@ -1,0 +1,39 @@
+<!-- 
+ Salesforce mein file upload karne ke liye humein kisi custom Apex code ki zaroorat nahi padti (shuruat mein), kyunki Salesforce humein ek bahut hi powerful standard component deta hai: lightning-file-upload.
+
+Yeh component automatically file ko Content Version aur Content Document mein badal kar specified Record ID se attach kar deta hai. -->
+
+<template>
+    <lightning-card title="Upload Files Locally" icon-name="standard:file">
+        <div class="slds-p-around_medium">
+            
+            <lightning-file-upload
+                label="Attach receipt or document"
+                name="fileUploader"
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                multiple>
+            </lightning-file-upload>
+
+            <p class="slds-m-top_medium slds-text-color_weak">
+                Files will be attached to Record ID: {recordId}
+            </p>
+
+        </div>
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Working Guide (Concepts):
+Where do files go?
+
+Logic: Salesforce mein files ContentDocument object mein save hoti hain. Jab aap record-id pass karte hain, toh Salesforce parde ke peeche ek ContentDocumentLink record bana deta hai jo file aur aapke record ko link karta hai.
+
+The @api recordId Magic:
+
+Requirement: Agar aap is component ko kisi Account ya Contact page par "Edit Page" (App Builder) ke zariye lagate hain, toh Salesforce automatically variable {recordId} ko populate kar deta hai. Aapko manually ID dene ki zaroorat nahi padti.
+
+Security/File Size:
+
+Working: Standard component 2GB tak ki files support karta hai. Lekin dhyan rahe, browser ki limit aur network speed ke hisaab se badi files mein time lag sakta hai. -->
