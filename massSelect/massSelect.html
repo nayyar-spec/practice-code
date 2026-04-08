@@ -1,0 +1,46 @@
+<!-- 
+ LWC DataTable mein checkbox ka option inbuilt hota hai. Iska asli maza tab hai jab hum multiple records select karke un par koi action (jaise Delete ya Status Update) perform karein.
+
+Humein yahan do cheezein seekhni hain:
+
+Selected rows ka data nikalna.
+
+Un selected records ki count dikhana. -->
+
+<template>
+    <lightning-card title="Mass Selection Demo" icon-name="standard:task2">
+        
+        <div slot="actions">
+            <span class="slds-m-right_small">Selected: <b>{selectedCount}</b></span>
+            <lightning-button 
+                label="Process Selected" 
+                variant="brand" 
+                onclick={processSelected}>
+            </lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                onrowselection={handleRowSelection}>
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (Working & Logic)
+onrowselection Event:
+
+Logic: Ye event tab trigger hota hai jab aap ek single row select karo, ya "Select All" wala header checkbox dabao. Ye hamesha updated list bhejta hai.
+
+map() Function:
+
+Requirement: Apex hamesha List<Id> ya List<Account> mangta hai. JS se sirf IDs nikalne ke liye hum selectedRecords.map(item => item.Id) use karte hain. Ye poore object mein se sirf Id nikal kar naya array bana deta hai.
+
+UI Feedback:
+
+Working: selectedCount variable ko HTML mein dikhana achha practice hai, taaki user ko pata chale ki usne kitne records select kiye hain (khaas kar jab table lambi ho aur scroll ho rahi ho). -->

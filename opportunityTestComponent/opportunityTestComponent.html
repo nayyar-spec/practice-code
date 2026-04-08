@@ -1,0 +1,27 @@
+<template>
+    <lightning-card class="slds-grid slds-wrap">
+        <div class="slds-grid slds-wrap">
+            <lightning-tabset class="slds-col slds-size_10-of-12">
+                <template for:each={tabs} for:item="tab">
+                    <lightning-tab key={tab.value} label={tab.label} value={tab.value} onactive={handleClick} >
+                    </lightning-tab>
+                </template>
+            </lightning-tabset>
+            <div class="slds-col slds-size_2-of-12">
+                <lightning-button-icon  icon-name="utility:refresh" alternative-text="Refresh" class="slds-p-around_xx-small" onclick={refreshTable}></lightning-button-icon>
+                <lightning-button label="Add" variant="brand" onclick={createRecord}></lightning-button>
+            </div>
+        </div>
+        
+        <lightning-datatable 
+        key-field="Id" 
+        data={filteredOpportunities} 
+        columns={columns} 
+        sorted-by={sortBy}
+        sorted-direction={sortDirection}
+        onsort={doSorting}>
+
+        </lightning-datatable>
+    </lightning-card>
+    
+</template>

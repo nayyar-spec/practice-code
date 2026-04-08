@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Parent Component (Topic #8)" icon-name="standard:user">
+        <div class="slds-p-around_medium">
+            <p class="slds-text-heading_small">Message: {messageFromChild}</p>
+            
+            <hr/>
+
+            <c-child-comp oncontact={handleChildMessage}></c-child-comp>
+        </div>
+    </lightning-card>
+</template>
+
+<!-- CustomEvent('contact', ...):
+
+Child side: Child ne ek chitti likhi jiska title 'contact' hai.
+
+Data: Chitti ke andar detail naam ka ek box hai jisme message likha hai.
+
+this.dispatchEvent(myEvent):
+
+Child ne wo chitti hawa mein uchhal di. LWC mein ise "Bubble up" kehte hain.
+
+oncontact={handleChildMessage}:
+
+Parent side: Parent ne apne kaan khule rakhe hain. Jaise hi use 'contact' naam ki chitti mili (prefix 'on' ke saath), usne turant apna function handleChildMessage activate kar diya.
+
+event.detail:
+
+Parent ne chitti ka dabba (detail) khola aur usme se message nikal kar apni screen par dikha diya. -->

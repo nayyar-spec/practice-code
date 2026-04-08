@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="Lazy Loading (Infinite Scroll)" icon-name="standard:account">
+        
+        <div style="height: 400px;">
+            
+            <lightning-datatable
+                key-field="Id"
+                data={accounts}
+                columns={columns}
+                enable-infinite-loading
+                onloadmore={loadMoreData}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+
+        </div>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (Key Concepts):
+Spread Operator (...):
+
+Logic: this.accounts = [...this.accounts, ...result].
+
+Requirement: LWC mein agar aap list mein data push karte ho, toh UI refresh nahi hota. Humein poori list ki ek "Nayi Copy" banani padti hai, tabhi LWC ko pata chalta hai ki data badal gaya hai.
+
+OFFSET (Apex):
+
+Working: Ye Salesforce database ko batata hai ki "Bhai, pehle 20 records chhod do, uske aage ke dikhao".
+
+Fixed Height Container:
+
+Requirement: lightning-datatable ko hamesha ek fixed height wale <div> mein rakhein. Agar height fix nahi hogi, toh table poore page par phail jayegi aur "Scroll" event trigger hi nahi hoga. -->

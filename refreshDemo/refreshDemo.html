@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Refresh Apex Practical Guide" icon-name="standard:account">
+        
+        <div class="slds-m-around_medium">
+            <lightning-button 
+                label="Check for New Data" 
+                variant="brand" 
+                onclick={handleRefresh}
+                class="slds-m-bottom_medium">
+            </lightning-button>
+
+            <template if:true={accounts}>
+                <template for:each={accounts} for:item="acc">
+                    <div key={acc.Id} class="slds-box slds-m-bottom_x-small">
+                        <strong>Name:</strong> {acc.Name} | <strong>Phone:</strong> {acc.Phone}
+                    </div>
+                </template>
+            </template>
+        </div>
+
+    </lightning-card>
+</template>

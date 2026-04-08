@@ -1,0 +1,36 @@
+<!-- 
+ Sabse pehle aapko Salesforce Setup mein ek Platform Event banana hoga:
+
+Label: Notification Event
+
+Object Name: Notification_Event__e (Salesforce automatic __e lagata hai)
+
+Fields: Ek Text field banaiye jiska naam ho Message__c. -->
+
+<template>
+    <lightning-card title="Real-time Platform Events" icon-name="standard:rtc_presence">
+        <div class="slds-p-around_medium">
+            <p class="slds-m-bottom_small">Waiting for live updates from Salesforce...</p>
+            
+            <template for:each={messages} for:item="msg">
+                <div key={msg} class="slds-box slds-theme_shade slds-m-top_xx-small">
+                    <p>{msg}</p>
+                </div>
+            </template>
+
+            <template if:false={messages.length}>
+                <p class="slds-text-color_weak">No live updates yet.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Working Guide:
+empApi (Streaming API): * Requirement: Ye CometD technology use karta hai jo browser aur server ke beech ek "Open Tunnel" bana deta hai.
+
+Replay ID (-1): * Logic: -1 ka matlab hai "Abhi se jo naye messages aayenge sirf wo dikhao". Agar aap -2 use karenge, toh puraane (past 24 hours) messages bhi load honge.
+
+disconnectedCallback:
+
+Working: Hamesha unsubscribe karein taaki memory leak na ho aur browser ki performance slow na pade. -->

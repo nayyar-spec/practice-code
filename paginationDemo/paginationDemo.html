@@ -1,0 +1,64 @@
+<!-- Pagination do tarah ki hoti hai:
+
+Client-side: Saara data ek baar mangwa lo aur JS se tukdon mein dikhao (Chote data ke liye best).
+
+Server-side: Har page ke liye Apex se naya data mangwao (Bade data ke liye best).
+
+Yahan hum Client-side Pagination seekhenge kyunki ye fast hoti hai aur beginners ke liye logic samajhne mein aasaan hai.
+
+1. JavaScript Logic (paginationDemo.js)
+Yahan main logic slice() method ka hai, jo array mein se ek specific hissa nikal kar dikhata hai. -->
+
+<template>
+    <lightning-card title="LWC Pagination Demo" icon-name="standard:multi_picklist">
+        
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={visibleAccounts}
+                columns={columns}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+
+            <div class="slds-m-top_medium slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+                
+                <lightning-button 
+                    label="Previous" 
+                    icon-name="utility:chevronleft" 
+                    onclick={handlePrevious}
+                    disabled={isFirstPage}>
+                </lightning-button>
+
+                <span class="slds-p-horizontal_medium">
+                    Page <b>{currentPage}</b> of <b>{totalPage}</b>
+                </span>
+
+                <lightning-button 
+                    label="Next" 
+                    icon-name="utility:chevronright" 
+                    icon-position="right"
+                    onclick={handleNext}
+                    disabled={isLastPage}>
+                </lightning-button>
+
+            </div>
+        </div>
+
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Working Guide (Concepts):
+Math.ceil():
+
+Logic: Agar total records 12 hain aur page size 5 hai, toh 12 / 5 = 2.4. Math.ceil ise 3 bana deta hai kyunki humein 3rd page chahiye bache hue 2 records ke liye.
+
+slice(start, end):
+
+Requirement: Ye asli array (allAccounts) ko kharab nahi karta, bas uska ek tukda copy karke visibleAccounts mein daal deta hai.
+
+Example: Page 2 par: start = 5, end = 10. Toh records index 5 se 9 tak dikhenge.
+
+Getters (isFirstPage/isLastPage):
+
+Requirement: User experience (UX) ke liye zaroori hai. Agar user page 1 par hai aur "Previous" dabata rahe, toh error aa sakti hai. Isliye hum button ko hi disabled kar dete hain. -->

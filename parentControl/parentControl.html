@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Parent to Child (@api) Demo" icon-name="standard:reward">
+        <div class="slds-p-around_medium">
+            
+            <lightning-input 
+                label="Type message for Child" 
+                onchange={handleInputChange}>
+            </lightning-input>
+
+            <br/>
+
+            <c-child-display message-from-parent={inputValue}></c-child-display>
+
+            <br/>
+            <lightning-button label="Child ko Reset Karo" onclick={handleReset}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

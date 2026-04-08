@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Orders List">
+        <div class="slds-p-around_medium">
+            <lightning-datatable
+                key-field="id"
+                data={orderList}
+                columns={columns}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

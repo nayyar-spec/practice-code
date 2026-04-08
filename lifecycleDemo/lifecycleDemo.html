@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Lifecycle Hooks Demo (Topic #10)" icon-name="standard:process">
+        <div class="slds-p-around_medium">
+            <p class="slds-text-heading_medium">Current Status: <strong>{stage}</strong></p>
+            
+            <p class="slds-m-top_medium">
+                Console (F12) khol kar dekho, wahan aapko in hooks ke chalne ka order dikhega!
+            </p>
+        </div>
+    </lightning-card>
+</template>
+
+<!-- 
+Detailed Explanation (Interview & Future ke liye)
+A. Constructor vs ConnectedCallback (The Main Confusion)
+Constructor tab chalta hai jab component sirf "Code" hai (Memory mein hai).
+
+ConnectedCallback tab chalta hai jab component "Salesforce Page" ka hissa ban chuka hai. Isliye, agar aapko this.recordId ya kisi property ka use karna hai, toh humesha ConnectedCallback hi use karein.
+
+B. RenderedCallback ka Khatra (Infinite Loop)
+Dhyan dein: Agar aap renderedCallback ke andar kisi aisi property ko badalte ho jo HTML mein use ho rahi hai, toh component phir se render hoga. Phir se render hoga toh renderedCallback phir chalega. Isse ek Infinite Loop ban jayega aur browser hang ho jayega. -->
+
+<!-- 
+Hook Name,           Kab chalta hai?,        Kya karna chahiye?
+constructor,         Memory mein bante hi,   Simple initialization.
+connectedCallback,   Page par aate hi,       "Apex call, Logic calculation."
+renderedCallback,    UI dikhne ke baad,      "DOM manipulation, Charts load karna."
+errorCallback,       Jab kuch fat jaye,      Error handle karna (Exception handling). -->

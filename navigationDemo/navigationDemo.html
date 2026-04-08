@@ -1,0 +1,61 @@
+<template>
+    <lightning-card title="LWC Navigation Service (Topic #11)" icon-name="standard:location">
+        
+        <div class="slds-p-around_medium slds-grid slds-grid_vertical">
+            <lightning-button 
+                label="Go to Home" 
+                onclick={navigateToHome} 
+                class="slds-m-bottom_small">
+            </lightning-button>
+
+            <lightning-button 
+                label="Create New Contact" 
+                variant="brand"
+                onclick={navigateToNewContact} 
+                class="slds-m-bottom_small">
+            </lightning-button>
+
+            <lightning-button 
+                label="Show All Accounts" 
+                variant="success"
+                onclick={navigateToAccountList} 
+                class="slds-m-bottom_small">
+            </lightning-button>
+
+            <lightning-button 
+                label="Open Google" 
+                variant="destructive"
+                onclick={navigateToGoogle}>
+            </lightning-button>
+
+        </div>
+    </lightning-card>
+</template>
+
+
+<!-- 
+Detailed Explanation (Code Breakdown)
+A. this[NavigationMixin.Navigate] ka logic:
+Aapne notice kiya hoga ki yahan . (dot) ki jagah [] (brackets) use ho rahe hain. Ye isliye kyunki NavigationMixin.Navigate ek "Symbol" hai, normal function nahi. Ye Salesforce ko batata hai ki page change karne ki command do.
+
+B. type vs attributes:
+type: Ye batata hai ki kahan jaana hai.
+
+standard__objectPage: Kisi object (Account/Contact) ki duniya mein.
+
+standard__namedPage: Home ya Chattered jaise fix pages.
+
+standard__webPage: Salesforce se bahar kisi URL par.
+
+attributes: Ye us destination ki detail hai (Kaunsa object? Kya action?).
+
+C. state property:
+State ka use hum tab karte hain jab humein extra information bhejni ho, jaise List View ka filter ya default values. -->
+
+<!-- 
+Destination,     Type,                   Key Attribute
+Home Page,       standard__namedPage,    pageName: 'home'
+New Record,      standard__objectPage,   actionName: 'new'
+Record List,     standard__objectPage,   actionName: 'list'
+Record Detail,   standard__recordPage,   recordId: '...'
+External URL,    standard__webPage,      url: '...' -->
